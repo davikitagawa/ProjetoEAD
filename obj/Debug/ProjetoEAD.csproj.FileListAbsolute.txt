@@ -1,0 +1,6 @@
+C:\Users\dkitagawa\source\repos\ProjetoEAD\ProjetoEAD\bin\Debug\ProjetoEAD.exe.config
+C:\Users\dkitagawa\source\repos\ProjetoEAD\ProjetoEAD\bin\Debug\ProjetoEAD.exe
+C:\Users\dkitagawa\source\repos\ProjetoEAD\ProjetoEAD\bin\Debug\ProjetoEAD.pdb
+C:\Users\dkitagawa\source\repos\ProjetoEAD\ProjetoEAD\obj\Debug\ProjetoEAD.csprojAssemblyReference.cache
+C:\Users\dkitagawa\source\repos\ProjetoEAD\ProjetoEAD\obj\Debug\ProjetoEAD.exe
+C:\Users\dkitagawa\source\repos\ProjetoEAD\ProjetoEAD\obj\Debug\ProjetoEAD.pdb
