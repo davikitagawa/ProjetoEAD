@@ -1,0 +1,130 @@
+-- CREATE DATABASE ProjetoTCC;
+-- USE ProjetoTCC;
+CREATE TABLE tb_Estado(
+	idEstado int not null primary key identity(1,1),
+	NomeEstado varchar(100) not null
+);
+CREATE TABLE tb_Pais(
+	idPais int not null primary key identity(1,1),
+	NomePais varchar(100) not null
+);
+CREATE TABLE tb_Cidade(
+	idCidade int not null primary key identity(1,1),
+	NomeCidade varchar(100) not null
+);
+
+CREATE TABLE  tb_Endereco(
+	idEndereco int not null primary key identity(1, 1),
+	idEstado int not null foreign key references tb_Estado(idEstado),
+	idPais int not null foreign key references tb_Pais(idPais),
+	idCidade int not null foreign key references tb_Cidade(idCidade),
+	Bairro varchar (100),
+	Cep varchar (9) not null,
+	Rua varchar(100),
+	Numero int,
+	Logradouro varchar(100),
+	Complemento varchar (200)
+);
+
+CREATE TABLE tb_TipoTelefone(
+	idTipoTelefone int not null primary key identity(1,1),
+	DescricaoTipoTelefone varchar(100) not null
+);
+
+CREATE TABLE tb_Telefone(
+	idTelefone int not null primary key identity(1,1),
+	idTipoTelefone int not null foreign key references tb_TipoTelefone(idTipoTelefone),
+	NumeroTelefone varchar(20) not null,
+);
+
+CREATE TABLE tb_TipoUsuario(
+	idTipoUsuario int not null primary key identity(1,1),
+	DescricaoUsuario varchar(100) not null
+);
+
+CREATE TABLE tb_Usuario(
+	idUsuario int not null primary key identity(1,1),
+	IdEndereco int not null foreign key references tb_Endereco(idEndereco),
+	IdTipoUsuario int not null foreign key references tb_TipoUsuario(idTipoUsuario),
+	NomeUsuario varchar(100) not null,
+	DataCriacaoUsuario Date not null,
+	DataNascimento Date,
+	GeneroUsuario bit
+);
+
+CREATE TABLE tb_UsuarioConta(
+	idUsuarioConta int not null primary key identity(1,1),
+	IdUsuario int not null foreign key references tb_Usuario(idUsuario),
+	EmailUsuario varchar(100) not null,
+	SenhaUsuario varchar (100) not null,
+	UsuarioAtivo bit not null
+);
+
+CREATE TABLE tb_TipoDoacao(
+	IdTipoDoacao int not null primary key identity (1,1),
+	DescricaoTipoDoacao varchar(100)
+);
+
+CREATE TABLE tb_Doacao(
+	idDoacao int not null primary key identity(1,1),
+	IdUsuario int not null foreign key references tb_Usuario(idUsuario),
+	IdTipoDoacao int not null foreign key references tb_TipoUsuario(idTipoUsuario),
+	ValorDoacao DECIMAL not null,
+	DataDoacao Date not null,
+);
+
+CREATE TABLE tb_TipoCurso(
+	idTipoCurso int not null primary key identity(1,1),
+	DescricaoCurso varchar(100) not null
+);
+
+CREATE TABLE tb_Curso(
+	idCurso int not null primary key identity(1,1),
+	idTipoCurso int not null foreign key references tb_TipoCurso(idTipoCurso),
+	NomeCurso varchar(100) not null,
+	DataCriacao Date not null,
+	DataModificacao Date,
+	CursoAtivo bit not null,
+	CargaHorario int not null
+);
+
+CREATE TABLE tb_RespostaAtividade(
+	idRespostaAtividade int not null primary key identity(1,1),
+	DescricaoResposta varchar(200)
+);
+
+CREATE TABLE tb_Atividade(
+	IdAtividade int not null primary key identity (1,1),
+	IdCurso int not null foreign key references tb_Curso(idCurso),
+	NomeAtividade varchar(100) not null,
+	PrazoAtividade Date,
+	NotaAtividade int,
+	DataModificacaoAtividade Date,
+	DataCriacaoAtividade Date not null,
+	idRespostaAtividade int not null Foreign key references tb_RespostaAtividade(idRespostaAtividade)
+);
+
+CREATE TABLE tb_Aula(
+	idAula int not null primary key identity(1,1),
+	idCurso int not null foreign key references tb_Curso(idCurso),
+	NomeAula varchar(200) not null,
+	DataCriacaoAula Date not null,
+);
+
+CREATE TABLE tb_AtividadeAula(
+	idAtividade int not null foreign key references tb_Atividade(idAtividade),
+	idAula int not null foreign key references tb_Aula(idAula)
+);
+
+CREATE TABLE tb_Comentario(
+	idComentario int not null primary key identity(1,1),
+	idResposta int not null foreign key references tb_Comentario (idComentario),
+	idUsuario int not null foreign key references tb_Usuario(idUsuario),
+	DataModificacao Date,
+	DataCriacao Date not null,
+	TextoComentario Varchar (MAX) not null
+);
+
+
+
+
